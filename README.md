@@ -1,1 +1,1 @@
-# dense_depth_priors_nerf
+# Dense Depth Priors for Neural Radiance Fields from Sparse Input Views

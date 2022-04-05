@@ -1,91 +1,274 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Dense Depth Priors for Neural Radiance Fields from Sparse Input Views</title>
-    <link rel="stylesheet" href="w3.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Dense Depth Priors for Neural Radiance Fields from Sparse Input Views">
+  <meta name="keywords" content="Neural Radiance Fields, Depth Completion, 3D Reconstruction">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dense Depth Priors for Neural Radiance Fields from Sparse Input Views</title>
 
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
 <body>
 
-<br/>
-<br/>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://niessnerlab.org/members/barbara_roessle/profile.html">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
 
-<div class="w3-container" id="paper">
-    <div class="w3-content" style="max-width:850px">
-  
-    <h2 align="center" id="title1"><b>Dense Depth Priors for Neural Radiance Fields</b></h2>
-    <h2 align="center" id="title2"><b>from Sparse Input Views</b></h2>
-    <br/>
-
-    <p align="center" id="title3">arXiv 2021</p>
-
-    <p align="center" class="center_text" id="authors">
-        <a target="_blank" href="http://www.niessnerlab.org/members/barbara_roessle/profile.html">Barbara Roessle</a><sup>1</sup>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a target="_blank" href="https://jonbarron.info/">Jonathan T. Barron</a><sup>2</sup>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a target="_blank" href="https://bmild.github.io/">Ben Mildenhall</a><sup>2</sup>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a target="_blank" href="https://pratulsrinivasan.github.io/">Pratul P. Srinivasan</a><sup>2</sup>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a target="_blank" href="https://www.niessnerlab.org/members/matthias_niessner/profile.html">Matthias Nie&szlig;ner</a><sup>1</sup>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-    </p>
-
-    <p class="center_text" align="center">
-        <sup>1</sup>Technical University of Munich
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <sup>2</sup>Google Research
-    </p>
-
-    <p>
-        <img src="teaser.svg" alt="teaser" height="100%" width="100%" >
-    <p/>
-
-    <h3 class="w3-left-align" id="intro"><b>Introduction</b></h3>
-    <p>
-        Neural radiance fields (NeRF) encode a scene into a neural representation that enables photo-realistic rendering of novel views. 
-        However, a successful reconstruction from RGB images requires a large number of input views taken under static conditions &mdash; typically up to a few hundred images for room-size scenes. 
-        Our method aims to synthesize novel views of whole rooms from an order of magnitude fewer images. 
-        To this end, we leverage dense depth priors in order to constrain the NeRF optimization.
-        First, we take advantage of the sparse depth data that is freely available from the structure from motion (SfM) preprocessing step used to estimate camera poses.
-        Second, we use depth completion to convert these sparse points into dense depth maps and uncertainty estimates, which are used to guide NeRF optimization.
-        Our method enables data-efficient novel view synthesis on challenging indoor scenes, using as few as 18 images for an entire scene.
-    </p>
-
-    <h3 class="w3-left-align" id="video"><b>Video</b></h3>
-    <p>
-    <iframe width="850" height="480" src="https://www.youtube.com/embed/zzkvvdcvksc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <p/>
-
-    <h3 class="w3-left-align" id="publication"><b>Publication</b></h3>
-    <a href="https://arxiv.org/pdf/2112.03288.pdf" target="__blank">Paper</a> | <a href="https://arxiv.org/abs/2112.03288" target="__blank">arXiv</a> | <span style="color:grey;">Code</span>
-    <center>
-        <a href="https://arxiv.org/pdf/2112.03288.pdf" target="__blank"><img src="paper_preview.jpg" style="max-width:100%" /></a>
-    </center><br>
-
-    If you find our project useful, please consider citing us:
-    <pre class="w3-panel w3-leftbar w3-light-grey" style="white-space: pre-wrap; font-family: monospace; font-size: 11px">
-@article{roessle2021depthpriorsnerf,
-    title={Dense Depth Priors for Neural Radiance Fields from Sparse Input Views},
-    author={Barbara Roessle and Jonathan T. Barron and Ben Mildenhall and Pratul P. Srinivasan and Matthias Nie{\ss}ner},
-    journal={arXiv preprint arXiv:2112.03288},
-    year={2021}
-}
-</pre>
-
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://niessnerlab.org/publications.html">
+            TUM Visual Computing
+          </a>
+        </div>
+      </div>
     </div>
 
-</div>
+  </div>
+</nav>
 
-<br/>
-<br/>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Dense Depth Priors for Neural Radiance Fields from Sparse Input Views</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://niessnerlab.org/members/barbara_roessle/profile.html">Barbara Roessle</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://jonbarron.info/">Jonathan T. Barron</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://bmild.github.io/">Ben Mildenhall</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://pratulsrinivasan.github.io/">Pratul P. Srinivasan</a><sup>2</sup>,
+              </span>
+            <span class="author-block">
+              <a href="https://niessnerlab.org/members/matthias_niessner/profile.html">Matthias Nießner</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Technical University of Munich,</span>
+            <span class="author-block"><sup>2</sup>Google Research</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2112.03288.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2112.03288"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=zzkvvdcvksc"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/barbararoessle/dense_depth_priors_nerf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/pipeline.jpg" alt="Dense Depth Priors for NeRF Pipeline">
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Dense Depth Priors</span> guide the radiance field optimization to render novel views of complete rooms from just a handful of input images.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <video autoplay controls muted loop height="100%">
+            <source src="static/images/video_s710_reduced.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video autoplay controls muted loop height="100%">
+            <source src="static/images/video_s781_reduced.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video autoplay controls muted loop height="100%">
+            <source src="static/images/video_s708_reduced.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video autoplay controls muted loop height="100%">
+            <source src="static/images/video_s758_reduced.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video autoplay controls muted loop height="100%">
+            <source src="static/images/video_s738_reduced.mp4"
+                    type="video/mp4">
+          </video>
+        </div>  
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Neural radiance fields (NeRF) encode a scene into a neural representation that enables photo-realistic rendering of novel views. 
+            However, a successful reconstruction from RGB images requires a large number of input views taken under static conditions &mdash; typically up to a few hundred images for room-size scenes. 
+            Our method aims to synthesize novel views of whole rooms from an order of magnitude fewer images. 
+            To this end, we leverage dense depth priors in order to constrain the NeRF optimization.
+            First, we take advantage of the sparse depth data that is freely available from the structure from motion (SfM) preprocessing step used to estimate camera poses.
+            Second, we use depth completion to convert these sparse points into dense depth maps and uncertainty estimates, which are used to guide NeRF optimization.
+            Our method enables data-efficient novel view synthesis on challenging indoor scenes, using as few as 18 images for an entire scene.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/zzkvvdcvksc?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{roessle2022depthpriorsnerf,
+      title={Dense Depth Priors for Neural Radiance Fields from Sparse Input Views}, 
+      author={Barbara Roessle and Jonathan T. Barron and Ben Mildenhall and Pratul P. Srinivasan and Matthias Nie{\ss}ner},
+      booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+      month={June},
+      year={2022}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/pdf/2112.03288.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/barbararoessle" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

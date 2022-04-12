@@ -1,0 +1,9 @@
+numpy
+torch
+tensorboard
+torchvision
+opencv-python
+pandas
+scikit-image
+lpips
+configargparse
